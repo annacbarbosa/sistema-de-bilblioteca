@@ -488,10 +488,36 @@ public static void salvarArquivo() {
             }
             arquivo.close();
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch ( Throwable e) {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 9*" +e.toString() );
         }
 }
+    public static void carregarArquivo() {
+        try {
+            String str;
+            BufferredReader reader, reader1;
+
+        reader = new BufferedReader (new FileReader(new File("C:\\bd\\livros.txt")));
+        while((srt=reader.readLine())!=null) {
+            String()=arrOfStr = str.split(",");
+            livros[i] = new Livro(arrOfStr[0].trim(), arrOfStr[1].trim(), arrOfStr[2].trim(), arrOfStr[3].trim(), arrOfStr[4].trim(), arrOfStr[5].trim(), arrOfStr[6].trim(), arrOfStr[6].trim());
+            i++;
+        }
+            reader.close();
+
+            reader1 = new BufferedReader(new FileReader(new File("C:\\bd\\revistas.txt")));
+            while((str=reader1.readLine())!=null)
+            {
+                String()=arrOfStr = str.split(",");
+                revistas[j] = new Revista (arrOfStr[0].trim(), arrOfStr[1].trim(), arrOfStr[2].trim(), arrOfStr[3].trim(), arrOfStr[4].trim(), arrOfStr[5].trim(), arrOfStr[6].trim(), arrOfStr[6].trim());
+                j++;
+            }
+            reader.close();
+        } catch (Throwable e) {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 10*" +e.toString() );
+        }
+    }
+
     public static void main(String[] args)
     {
         do
