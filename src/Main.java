@@ -1,181 +1,558 @@
-import java.util.Arrays;
+import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        Livro[] livros = new Livro[1000];
-        Revista[] revistas = new Revista[1000];
-        int escolha = 0, NumCadastroLivros = 0, NumCadastroRevistas = 0;
-        String nomeLivro, autor, editora, prateleira, ISBN, CDD, edicao, ano, secao, issn;
-        do {
-            System.out.println("\n=======================================");
-            System.out.println("|    Sistema de Cadastro de Livros    |");
-            System.out.println("=======================================\n");
-            System.out.println("[1] - Cadastrar livro"); // de 0 a 999
-            System.out.println("[2] - Cadastrar Revista"); // de 0 a 999
-            System.out.println("[3] - Procurar livro"); // por palavra chave
-            System.out.println("[4] - Listar todos livros");
-            System.out.println("[5] - Quantidade cadastrada/livre"); // x livros cadastrados | y livre
-            System.out.println("[6] - Excluir último elemento da lista");
-            System.out.println("[7] - Ordenar livros cadastrados");
-            System.out.println("[8] - Sair");
-            System.out.println("\n=======================================\n");
-            System.out.print("Escolha uma das opçoes: ");
-            escolha = input.nextInt();
+public class Main
+{
+    static Scanner inp = new Scanner(System.in);
+    static Livro[ ] livros = new Livro[1000];
+    static Revista[] revistas= new Revista[1000];
+    static String retorno;
+    static int i=0,j=0;
 
-            switch (escolha) {
+    public static void cadastrarLivro()
+    {
+        try
+        {
+            String nomelivro,autor, ISBN,ano, editora,prateleira,seção,CDD;
+            int edição;
 
-                /* Cadastro do Livro */
-                case 1:
+            System.out.println("Informe o nome do livro: ");
+            nomelivro=inp.next();
 
-                    System.out.println("Digite o nome do livro: ");
-                    nomeLivro = input.next();
-                    input.nextLine();
+            System.out.println("Informe o nome do autor: ");
+            autor=inp.next();
 
-                    System.out.println("Digite o nome do autor: ");
-                    autor = input.next();
-                    input.nextLine();
+            System.out.println("Informe o ISBN: ");
+            ISBN=inp.next();
 
-                    System.out.println("Digite o nome da editora: ");
-                    editora = input.next();
-                    input.nextLine();
+            System.out.println("Informe o ano de publicação: ");
+            ano=inp.next();
 
-                    System.out.println("Digite a prateleira: ");
-                    prateleira = input.next();
-                    input.nextLine();
+            System.out.println("Informe a editora: ");
+            editora=inp.next();
 
-                    System.out.println("Digite o ISBN: ");
-                    ISBN = input.next();
-                    input.nextLine();
+            System.out.println("Informe a edição: ");
+            edição=inp.nextInt();
 
-                    System.out.println("Digite o CDD: ");
-                    CDD = input.next();
-                    input.nextLine();
+            System.out.println("Informe a prateleira: ");
+            prateleira=inp.next();
 
-                    System.out.println("Digite a edicao: ");
-                    edicao = input.next();
-                    input.nextLine();
+            System.out.println("Informe a seção: ");
+            seção=inp.next();
 
-                    System.out.println("Digite o ano de lançamento: ");
-                    ano = input.next();
-                    input.nextLine();
+            System.out.println("Informe o CDD: ");
+            CDD=inp.next();
 
-                    System.out.println("Digite a secao: ");
-                    secao = input.next();
-                    input.nextLine();
+            livros[i]=new Livro(nomelivro, autor, ISBN, ano, editora, prateleira, seção, CDD, edição);
 
-                    livros[NumCadastroLivros] = new Livro(nomeLivro, autor, editora, prateleira, ISBN, CDD, edicao, ano,
-                            secao);
+            i++;
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 1*" +e.toString() );
+        }
+    }
 
-                    NumCadastroLivros++;
-                    break;
+    public static void cadastrarRevista()
+    {
+        try
+        {
+            String ISSN, nomelivro, autor, ISBN,ano, editora, prateleira, seção, CDD;
+            int edição;
 
-                /* Cadastro da Revista */
+            System.out.println("Informe o nome da revista: ");
+            nomelivro=inp.next();
 
-                case 2:
+            System.out.println("Informe o nome do autor: ");
+            autor=inp.next();
 
-                    System.out.println("Digite o nome da Revista: ");
-                    nomeLivro = input.next();
-                    input.nextLine();
+            System.out.println("Informe o ISSN: ");
+            ISSN=inp.next();
+            ISBN="-";
 
-                    System.out.println("Digite o nome do Autor: ");
-                    autor = input.next();
-                    input.nextLine();
+            System.out.println("Informe o ano de publicação: ");
+            ano=inp.next();
 
-                    System.out.println("Digite o nome da editora: ");
-                    editora = input.next();
-                    input.nextLine();
+            System.out.println("Informe a editora: ");
+            editora=inp.next();
 
-                    System.out.println("Digite a prateleira: ");
-                    prateleira = input.next();
-                    input.nextLine();
+            System.out.println("Informe a edição: ");
+            edição=inp.nextInt();
 
-                    System.out.println("Digite o ISBN: ");
-                    ISBN = input.next();
-                    input.nextLine();
+            System.out.println("Informe a prateleira: ");
+            prateleira=inp.next();
 
-                    System.out.println("Digite o CDD: ");
-                    CDD = input.next();
-                    input.nextLine();
+            System.out.println("Informe a seção: ");
+            seção=inp.next();
 
-                    System.out.println("Digite a edicao: ");
-                    edicao = input.next();
-                    input.nextLine();
+            System.out.println("Informe o CDD: ");
+            CDD=inp.next();
 
-                    System.out.println("Digite o ano de lançamento: ");
-                    ano = input.next();
-                    input.nextLine();
+            revistas[j]=new Revista(ISSN,nomelivro, autor, ISBN, ano, editora, prateleira, seção, CDD, edição);
 
-                    System.out.println("Digite a secao: ");
-                    secao = input.next();
-                    input.nextLine();
+            j++;
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 2*" +e.toString() );
+        }
+    }
 
-                    System.out.println("Digite a ISNN: ");
-                    issn = input.next();
-                    input.nextLine();
-
-                    revistas[NumCadastroRevistas] = new Revista(nomeLivro, autor, editora, prateleira, ISBN, CDD, edicao, ano,
-                            secao,issn);
-
-                    NumCadastroRevistas++;
-                    break;
-
-                /* Procurar Livros */
-                case 3:
-
-                    break;
-
-                /* Listar Livros */
-                case 4:
-                    if (NumCadastroLivros == 0) {
-                        System.out.println("Nenhum livro cadastrado ainda.");
-                    } else {
-                        for (int i = 0; i < NumCadastroLivros; i++) {
-                            System.out.println("Livros: " + (i +1));
-                            System.out.println(livros[i].getNomeLivro() + ", " +
-                                    livros[i].getAutor()+", " +
-                                    livros[i].getISBN() + ", "+
-                                    livros[i].getAno()+ ", "+
-                                    livros[i].getEditora()+ ", "+
-                                    livros[i].getPrateleira()+ ", "+
-                                    livros[i].getSecao()+ ", "+
-                                    livros[i].getCDD()+ ", "+
-                                    livros[i].getEdicao());
-                        }
-                    }
-                    break;
-
-                /* Quantidade Cadastrada/livre */
-                case 5:
-                    System.out.println("\n=================================");
-                    System.out.printf("%-30s %-1s", "| Quantidade cadastrada: " + NumCadastroLivros, " |");
-                    System.out.println();
-                    System.out.printf("%-30s %-1s", "| Quantidade livre: " + (999 - NumCadastroLivros), " |");
-                    System.out.println();
-                    System.out.println("=================================\n");
-                    break;
-
-                /* Excluir ultimo livro da lista */
-                case 6:
-                    if (NumCadastroLivros > 0 ) {
-                        NumCadastroLivros--;
-                        System.out.println("Numero de livros: " + NumCadastroLivros);
-                    }else{
-                        System.out.println("Nenhum livro cadastrado");
-                    }
-
-                    break;
-
-                /* Ordenar livros cadastrados */
-                case 7:
-
-                    Arrays.sort(livros);
-                    break;
+    public static void procurarLivroRevista(String chave)
+    {
+        try
+        {
+            for(int k=0;k<i;k++)
+            {
+                if(livros[k].getNomelivro().toLowerCase().indexOf(chave.toLowerCase())>=0 ||
+                        livros[k].getAutor().toLowerCase().indexOf(chave.toLowerCase())>=0)
+                {
+                    System.out.println("Livro: " + (k+1));
+                    System.out.println(livros[k].getNomelivro()+", " +
+                            livros[k].getAutor()+", " +
+                            livros[k].getISBN()+", " +
+                            livros[k].getAno()+", " +
+                            livros[k].getEditora()+", " +
+                            livros[k].getPrateleira()+", " +
+                            livros[k].getSeção()+", " +
+                            livros[k].getCDD()+", " +
+                            livros[k].getEdição());
+                }
             }
 
-        } while (escolha != 8);
+            for(int k=0;k<j;k++)
+            {
+                if(revistas[k].getNomelivro().toLowerCase().indexOf(chave.toLowerCase())>=0 ||
+                        revistas[k].getAutor().toLowerCase().indexOf(chave.toLowerCase())>=0)
+                {
+                    System.out.println("Revista: " + (k+1));
+                    System.out.println(revistas[k].getNomelivro()+", " +
+                            revistas[k].getAutor()+", " +
+                            revistas[k].getISBN()+", " +
+                            revistas[k].getAno()+", " +
+                            revistas[k].getEditora()+", " +
+                            revistas[k].getPrateleira()+", " +
+                            revistas[k].getSeção()+", " +
+                            revistas[k].getCDD()+", " +
+                            revistas[k].getEdição());
+                }
+            }
+            retorno="";
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 3*" +e.toString() );
+        }
+    }
 
-        input.close();
+    public static void listarLivrosRevistas()
+    {
+        try
+        {
+            int k;
+            for (k = 0; k < i; k++) {
+                System.out.println("Livro: " + (k + 1));
+                System.out.println(livros[k].getNomelivro() + ", "
+                        + livros[k].getAutor() + ", "
+                        + livros[k].getISBN() + ", "
+                        + livros[k].getAno() + ", "
+                        + livros[k].getEditora() + ", "
+                        + livros[k].getPrateleira() + ", "
+                        + livros[k].getSeção() + ", "
+                        + livros[k].getCDD() + ", "
+                        + livros[k].getEdição());
+            }
+
+            for (k = 0; k < j; k++) {
+                System.out.println("Revista: " + (k + 1));
+                System.out.println(revistas[k].getNomelivro() + ", "
+                        + revistas[k].getAutor() + ", "
+                        + revistas[k].getISSN() + ", "
+                        + revistas[k].getAno() + ", "
+                        + revistas[k].getEditora() + ", "
+                        + revistas[k].getPrateleira() + ", "
+                        + revistas[k].getSeção() + ", "
+                        + revistas[k].getCDD() + ", "
+                        + revistas[k].getEdição());
+            }
+
+            retorno = "";
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 4*" +e.toString() );
+        }
+    }
+
+    public static void memóriaUsada()
+    {
+        try
+        {
+            System.out.println("Total de memória Livros= 1000");
+            System.out.println("Usado= " + i);
+            System.out.println("Livre= " + (1000 - i));
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("Total de memória Revistass= 1000");
+            System.out.println("Usado= " + j);
+            System.out.println("Livre= " + (1000 - j));
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            retorno = "";
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 5*" +e.toString() );
+        }
+    }
+
+    public static void apagarItemLista()
+    {
+        try
+        {
+            System.out.println("1- Livro 2-Revista");
+            retorno=inp.next();
+
+            /******************************
+             Exclusão de livro
+             ******************************/
+            if (retorno.equals("1"))
+            {
+                System.out.println("1- Lista 2-Palavra chave");
+                retorno=inp.next();
+
+                if (retorno.equals("1"))
+                {
+                    int k;
+                    for (k = 0; k < i; k++) {
+                        System.out.println("Livro: " + (k + 1));
+                        System.out.println(livros[k].getNomelivro() + ", "
+                                + livros[k].getAutor() + ", "
+                                + livros[k].getISBN() + ", "
+                                + livros[k].getAno() + ", "
+                                + livros[k].getEditora() + ", "
+                                + livros[k].getPrateleira() + ", "
+                                + livros[k].getSeção() + ", "
+                                + livros[k].getCDD() + ", "
+                                + livros[k].getEdição());
+                    }
+
+                    retorno = inp.next();
+                    if (Integer.parseInt(retorno) <= i
+                            && Integer.parseInt(retorno) >= 1) {
+                        i--;
+                        for (k = Integer.parseInt(retorno) - 1; k <= i; k++) {
+                            livros[k] = livros[k + 1];
+                        }
+                        livros[k + 1] = null;
+                    } else {
+                        System.out.println("Fora da faixa!!!");
+                    }
+                }
+                else  if (retorno.equals("2"))
+                {
+                    System.out.println("Palavra chave: ");
+                    retorno=inp.next();
+
+                    for(int k=0;k<i;k++)
+                    {
+                        if(livros[k].getNomelivro().toLowerCase().indexOf(retorno.toLowerCase())>=0 ||
+                                livros[k].getAutor().toLowerCase().indexOf(retorno.toLowerCase())>=0)
+                        {
+                            System.out.println("Livro: " + (k+1));
+                            System.out.println(livros[k].getNomelivro()+", " +
+                                    livros[k].getAutor()+", " +
+                                    livros[k].getISBN()+", " +
+                                    livros[k].getAno()+", " +
+                                    livros[k].getEditora()+", " +
+                                    livros[k].getPrateleira()+", " +
+                                    livros[k].getSeção()+", " +
+                                    livros[k].getCDD()+", " +
+                                    livros[k].getEdição());
+                        }
+                    }
+
+                    System.out.println("Posição: ");
+                    retorno = inp.next();
+                    if (Integer.parseInt(retorno) <= i
+                            && Integer.parseInt(retorno) >= 1)
+                    {
+                        int k;
+                        i--;
+                        for (k = Integer.parseInt(retorno) - 1; k <= i; k++)
+                        {
+                            livros[k] = livros[k + 1];
+                        }
+                        livros[k + 1] = null;
+                    }
+                    else
+                    {
+                        System.out.println("Fora da faixa!!!");
+                    }
+                }
+                else
+                {
+                    System.out.println("Opção inválida!");
+                }
+
+            }
+            /******************************
+             Exclusão de revista
+             ******************************/
+            else if (retorno.equals("2"))
+            {
+                System.out.println("1- Lista 2-Palavra chave");
+                retorno=inp.next();
+
+                if (retorno.equals("1"))
+                {
+                    int k;
+                    for (k = 0; k < j; k++) {
+                        System.out.println("Revista: " + (k + 1));
+                        System.out.println(revistas[k].getNomelivro() + ", "
+                                + revistas[k].getAutor() + ", "
+                                + revistas[k].getISSN() + ", "
+                                + revistas[k].getAno() + ", "
+                                + revistas[k].getEditora() + ", "
+                                + revistas[k].getPrateleira() + ", "
+                                + revistas[k].getSeção() + ", "
+                                + revistas[k].getCDD() + ", "
+                                + revistas[k].getEdição());
+                    }
+
+                    retorno = inp.next();
+                    if (Integer.parseInt(retorno) <= j && Integer.parseInt(retorno) >= 1) {
+                        j--;
+                        for (k = Integer.parseInt(retorno) - 1; k <= j; k++) {
+                            revistas[k] = revistas[k + 1];
+                        }
+                        revistas[k + 1] = null;
+                    } else {
+                        System.out.println("Fora da faixa!!!");
+                    }
+                }
+                else  if (retorno.equals("2"))
+                {
+                    System.out.println("Palavra chave: ");
+                    retorno=inp.next();
+
+                    for(int k=0;k<i;k++)
+                    {
+                        if(revistas[k].getNomelivro().toLowerCase().indexOf(retorno.toLowerCase())>=0 ||
+                                revistas[k].getAutor().toLowerCase().indexOf(retorno.toLowerCase())>=0)
+                        {
+                            System.out.println("Revista: " + (k+1));
+                            System.out.println(revistas[k].getNomelivro()+", " +
+                                    revistas[k].getAutor()+", " +
+                                    revistas[k].getISSN()+", " +
+                                    revistas[k].getAno()+", " +
+                                    revistas[k].getEditora()+", " +
+                                    revistas[k].getPrateleira()+", " +
+                                    revistas[k].getSeção()+", " +
+                                    revistas[k].getCDD()+", " +
+                                    revistas[k].getEdição());
+                        }
+                    }
+
+                    System.out.println("Posição: ");
+                    retorno = inp.next();
+                    if (Integer.parseInt(retorno) <= i
+                            && Integer.parseInt(retorno) >= 1)
+                    {
+                        int k;
+                        j--;
+                        for (k = Integer.parseInt(retorno) - 1; k <= i; k++)
+                        {
+                            revistas[k] = revistas[k + 1];
+                        }
+                        revistas[k + 1] = null;
+                    }
+                    else
+                    {
+                        System.out.println("Fora da faixa!!!");
+                    }
+                }
+                else
+                {
+                    System.out.println("Opção inválida!");
+                }
+
+
+            }
+            else
+            {
+                System.out.println("Opção inválida!!!");
+            }
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 6*" +e.toString() );
+        }
+
+    }
+
+    public static void ordenarLivrosRevistas()
+    {
+        try
+        {
+            for (int k = 0; k < (i - 1); k++) {
+                for (int z = 0; z < (i - 1); z++) {
+                    Livro aux = new Livro();
+                    Livro aux1 = new Livro();
+                    aux = livros[z];
+                    aux1 = livros[z + 1];
+                    if (aux.getNomelivro().toLowerCase().compareTo(aux1.getNomelivro().toLowerCase()) > 0) {
+                        livros[z] = aux1;
+                        livros[z + 1] = aux;
+                    }
+                }
+            }
+
+            for (int k = 0; k < (j - 1); k++) {
+                for (int z = 0; z < (j - 1); z++) {
+                    Revista aux = new Revista();
+                    Revista aux1 = new Revista();
+                    aux = revistas[z];
+                    aux1 = revistas[z + 1];
+                    if (aux.getNomelivro().toLowerCase().compareTo(aux1.getNomelivro().toLowerCase()) > 0) {
+                        revistas[z] = aux1;
+                        revistas[z + 1] = aux;
+                    }
+                }
+            }
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 7*" +e.toString() );
+        }
+
+    }
+
+    public static void menu()
+    {
+        try
+        {
+            System.out.println("*******************************");
+            System.out.println("*Sistema de Cadastro de Livros*");
+            System.out.println("*******************************");
+            System.out.println("1 - Cadastrar livro/revista");
+            System.out.println("2 - Procurar livro/revista");
+            System.out.println("3 - Listar livros/revista");
+            System.out.println("4 - Quantidade cadastrada/livre");
+            System.out.println("5 - Excluir livro/revista");
+            System.out.println("6 - Ordenar livros/revista");
+            System.out.println("7 - Encerrar programa");
+            retorno = inp.next();
+        }
+        catch (Throwable e)
+        {
+            System.out.println("Ocorreu algum erro. Contate o suporte! 8*" +e.toString() );
+        }
+    }
+public static void salvarArquivo() {
+        try {
+            FileWriter arquivo=new FileWriter(new File("C:\\bd", "livros.txt"));
+            int k;
+
+            for (k = 0; k<i; k++) {
+                arquivo.write( livros[k].getAutor()+", " +
+                        livros[k].getISBN()+", " +
+                        livros[k].getAno()+", " +
+                        livros[k].getEditora()+", " +
+                        livros[k].getPrateleira()+", " +
+                        livros[k].getSeção()+", " +
+                        livros[k].getCDD()+", " +
+                        livros[k].getEdição() + ", \n"
+            );
+            }
+            arquivo.close();
+
+            FileWriter arquivo1 = new FileWriter(new File("C:\\bd", "revistas.txt"));
+            int j;
+
+            for (j = 0; j<i; j++) {
+                arquivo.write( revistas[j].getAutor()+", " +
+                        revistas[j].getISBN()+", " +
+                        revistas[j].getAno()+", " +
+                        revistas[j].getEditora()+", " +
+                        revistas[j].getPrateleira()+", " +
+                        revistas[j].getSeção()+", " +
+                        revistas[j].getCDD()+", " +
+                        revistas[j].getEdição() + ", \n"
+                );
+            }
+            arquivo.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+}
+    public static void main(String[] args)
+    {
+        do
+        {
+            menu();
+
+            /*  1 - Cadastro de livro/revista    */
+            if (retorno.equals("1"))
+            {
+                System.out.println("1- Livro 2-Revista");
+                retorno=inp.next();
+
+                if(retorno.equals("1"))
+                {
+                    cadastrarLivro();
+                }
+                else if (retorno.equals("2"))
+                {
+                    cadastrarRevista();
+                }
+                else
+                {
+                    System.out.println("Opção inválida!!!");
+                }
+                retorno="";
+            }
+
+            /*  2 - Procurar livros/revistas  */
+            if (retorno.equals("2"))
+            {
+                System.out.println("Informe a palavra chave: ");
+                String chave=inp.next();
+                procurarLivroRevista(chave);
+            }
+
+            /*  3 - Listar livros/revistas  */
+            if (retorno.equals("3"))
+            {
+                listarLivrosRevistas();
+            }
+
+            /*  4 - Listar memória usada    */
+            if (retorno.equals("4"))
+            {
+                memóriaUsada();
+            }
+
+            /* 5 -  Apagar item da lista memória usada    */
+            if (retorno.equals("5"))
+            {
+                apagarItemLista();
+            }
+
+            /* 6 - Ordenação de livros    */
+            if (retorno.equals("6"))
+            {
+                ordenarLivrosRevistas();
+            }
+
+        }while(!retorno.equals("7"));
+        salvarArquivo();
+        System.out.println("Fim do programa");
     }
 }
