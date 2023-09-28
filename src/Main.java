@@ -1,5 +1,4 @@
 import java.io.*;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main
@@ -493,27 +492,32 @@ public static void salvarArquivo() {
         }
 }
     public static void carregarArquivo() {
-        try {
+        try
+        {
             String str;
-            BufferredReader reader, reader1;
+            BufferedReader reader,reader1;
 
-        reader = new BufferedReader (new FileReader(new File("C:\\bd\\livros.txt")));
-        while((srt=reader.readLine())!=null) {
-            String()=arrOfStr = str.split(",");
-            livros[i] = new Livro(arrOfStr[0].trim(), arrOfStr[1].trim(), arrOfStr[2].trim(), arrOfStr[3].trim(), arrOfStr[4].trim(), arrOfStr[5].trim(), arrOfStr[6].trim(), arrOfStr[6].trim());
-            i++;
-        }
+            reader = new BufferedReader(new FileReader(new File("C:\\bd\\livros.txt")));
+            while((str=reader.readLine())!=null)
+            {
+                String[] arrOfStr = str.split(",");
+                livros[i]=new Livro(arrOfStr[0].trim(), arrOfStr[1].trim(), arrOfStr[2].trim(), arrOfStr[3].trim(), arrOfStr[4].trim(), arrOfStr[5].trim(), arrOfStr[6].trim(), arrOfStr[7].trim(), Integer.parseInt(arrOfStr[8].trim()));
+                i++;
+            }
             reader.close();
 
             reader1 = new BufferedReader(new FileReader(new File("C:\\bd\\revistas.txt")));
             while((str=reader1.readLine())!=null)
             {
-                String()=arrOfStr = str.split(",");
-                revistas[j] = new Revista (arrOfStr[0].trim(), arrOfStr[1].trim(), arrOfStr[2].trim(), arrOfStr[3].trim(), arrOfStr[4].trim(), arrOfStr[5].trim(), arrOfStr[6].trim(), arrOfStr[6].trim());
+                String[] arrOfStr = str.split(",");
+                revistas [j]=new Revista(arrOfStr[2].trim(), arrOfStr[0].trim(), arrOfStr[1].trim(), "", arrOfStr[3].trim(), arrOfStr[4].trim(), arrOfStr[5].trim(), arrOfStr[6].trim(), arrOfStr[7].trim(), Integer.parseInt(arrOfStr[8].trim()));
                 j++;
             }
-            reader.close();
-        } catch (Throwable e) {
+            reader1.close();
+
+        }
+        catch (Throwable e)
+        {
             System.out.println("Ocorreu algum erro. Contate o suporte! 10*" +e.toString() );
         }
     }
